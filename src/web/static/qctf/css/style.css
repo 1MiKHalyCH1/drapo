@@ -210,3 +210,20 @@ html,body {
 .help-block {
 	border-radius: 0;
 }
+
+/*Inputs*/
+
+.form-control:focus {
+	color: #fff;
+	background-color: #131416;
+	border-color: #17BF1C;
+	box-shadow: none;
+}
+
+a {
+	color: #17BF1C;
+}
+
+a:hover {
+	color: #17BF1C;
+}
