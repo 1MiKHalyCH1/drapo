@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
 
     <!-- Bootstrap CSS -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400" rel="stylesheet">
@@ -23,12 +22,12 @@
   </head>
 
   <body>
-    <main class="container-fluid h-100">
+    <div class="container-fluid h-100">
       <div class="row h-100 justify-content-center align-items-center">
           <div class="jumbotron" id="pda-login">
 
             <form class="px-5">
-              <h1 class="text-center mb-4">QCTF STALKER</h1>
+              <h1 class="text-white text-center">QCTF STALKER</h1>
               <br>
               {% for message in messages %}
                 <div class="alert {{ message.tags }}">{{ message }}</div>
@@ -49,7 +48,7 @@
               <p class="text-muted text-center w-100">Все события и герои вымышлены. Любые совпадения с реальными личностями случайны.<br>Проверяющая система Drapo разработана <a href="#">Андреем Гейном</a>. Соревнование QCTF Starter 2018 подготовлено командами<br>Destructive Voice, VoidHack и Хакердом из УрФУ, и левым чуваком, который даже не фронтэндер.</p>
           </nav>
         </div>
-      </main>
+      </div>
 
     <script src="{% static 'qctf/js/jquery.floatThead.min.js' %}"></script>
     <script src="{% static 'qctf/js/popper.min.js' %}"></script>
