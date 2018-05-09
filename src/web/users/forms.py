@@ -12,7 +12,8 @@ class LoginForm(forms.Form):
         widget=forms.TextInput(attrs={
             'autofocus': 'autofocus',
             'class': 'form-control-short',
-            'placeholder': 'Вводи, не стесняйся'
+            'placeholder': 'Вводи, не стесняйся',
+            'class': 'form-control form-stalk bg-stalk-dark'
         })
     )
 
@@ -22,7 +23,8 @@ class LoginForm(forms.Form):
         max_length=128,
         widget=forms.PasswordInput(attrs={
             'class': 'form-control-short',
-            'placeholder': 'Чики-брики'
+            'placeholder': 'Чики-брики',
+            'class': 'form-control form-stalk bg-stalk-dark'            
         })
     )
 
