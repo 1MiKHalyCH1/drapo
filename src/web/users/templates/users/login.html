@@ -14,7 +14,7 @@
     <meta name="author" content="">
 
     <!-- Bootstrap CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="{% static 'qctf/css/style.css' %}" rel="stylesheet">
     <title>QCTF Login - Вход в систему</title>
 
@@ -67,8 +67,6 @@
               xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
           }
       });
-
-      $('#scoreboard').floatThead();
     </script>
   </body>
 </html>
