@@ -2,17 +2,12 @@
 
 {% load bootstrap %}
 
-{% block title %}The QCTF Times - Вход в систему{% endblock %}
+{% block title %}QCTF Login - Вход в систему{% endblock %}
 
 {% block content %}
 <main class="login-form d-flex justify-content-center">
     <div class="flex-column">
-        <h2 class="text-center mb-4">Вход в систему</h2>
-
-        <div class="alert alert-info">
-            Если вы участвовали в соревновании очно, но не записали выданные вам логин и пароль,
-            вы можете <a href="{% url 'password_reset' %}">сбросить пароль</a>, указав e-mail капитана команды
-        </div>
+        <h2 class="text-center mb-4">QCTF Login</h2>
 
         {% for message in messages %}
             <div class="alert {{ message.tags }}">{{ message }}</div>
@@ -23,7 +18,7 @@
             <fieldset>
                 {{ form|bootstrap }}
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="submit" class="btn btn-primary">И в дамки</button>
                 </div>
             </fieldset>
         </form>

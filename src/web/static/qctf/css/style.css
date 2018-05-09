@@ -1,508 +1,236 @@
-/* stylelint-disable selector-list-comma-newline-after */
-
-.blog-header {
-  line-height: 1;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-@font-face {
-  font-family: 'Cloister Black';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Cloister Black'), url(../fonts/CloisterBlack.ttf);
-}
-
-.blog-header-logo {
-  font-family: 'Cloister Black', "Playfair Display", Georgia, "Times New Roman", serif;
-  font-size: 3rem;
-}
-
-.blog-header-logo:hover {
-  text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-}
-
-.display-4 {
-  font-size: 2.5rem;
-}
-@media (min-width: 768px) {
-  .display-4 {
-    font-size: 3rem;
-  }
-}
-
-.nav-scroller {
-  position: relative;
-  z-index: 2;
-  height: 2.75rem;
-  overflow-y: hidden;
-}
-
-.nav-scroller .nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  padding-bottom: 1rem;
-  margin-top: -1px;
-  overflow-x: auto;
-  text-align: center;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-
-.nav-scroller .nav-link {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: .875rem;
-}
-
-.card-img-right {
+html,body {
   height: 100%;
-  border-radius: 0 3px 3px 0;
+  background: url(../img/pda_bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: "Arial Narrow", Arial, sans-serif;
 }
 
-.flex-auto {
-  -ms-flex: 0 0 auto;
-  -webkit-box-flex: 0;
-  flex: 0 0 auto;
+.tab-content>.active>a {
+	color: #17BF1C;
+	text-decoration: underline;
 }
 
-.h-250 { height: 250px; }
-@media (min-width: 768px) {
-  .h-md-250 { height: 250px; }
+.tab-content>.active>a:hover {
+	color: #17BF1C;;
 }
 
-.border-top { border-top: 1px solid #e5e5e5; }
-.border-bottom { border-bottom: 1px solid #e5e5e5; }
 
-.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
-
-/*
- * Blog name and description
- */
-.blog-title {
-  margin-bottom: 0;
-  font-size: 2rem;
-  font-weight: 400;
-}
-.blog-description {
-  font-size: 1.1rem;
-  color: #999;
-}
-
-@media (min-width: 40em) {
-  .blog-title {
-    font-size: 3.5rem;
-  }
-}
-
-/* Pagination */
-.blog-pagination {
-  margin-bottom: 4rem;
-}
-.blog-pagination > .btn {
-  border-radius: 2rem;
-}
-
-/*
- * Blog posts
- */
-.blog-post {
-  margin-bottom: 4rem;
-}
-.blog-post-title {
-  margin-bottom: .25rem;
-  font-size: 2.5rem;
-}
-.blog-post-meta {
-  margin-bottom: 1.25rem;
-  color: #999;
-}
-
-/*
- * Footer
- */
-.blog-footer {
-  color: #999;
-  text-align: center;
-  border-top: .05rem solid #e5e5e5;
-  font-size: 0.8rem;
-}
-
-.blog-footer p {
-  margin-bottom: 12px;
-}
-
-.blog-footer p:last-child {
-  margin-bottom: 0;
-}
-
-
-header .text-muted {
-  font-size: 0.85rem;
-}
-
-.nav-scroller .text-muted {
-  font-size: 0.95rem;
-}
-
-.article-with-image {
-  height: 200px;
-}
-
-.article-with-image h3 {
-  font-size: 1.35rem;
-  line-height: 1.2;
-}
-
-.article {
-  height: 155px;
-}
-
-.article h3 {
-  font-size: 1.1rem;
-  line-height: 1.2;
-}
-
-.task-info {
-  color: darkcyan !important;
-  font-size: 0.85rem;
-  font-weight: 400;
-}
-
-.task-info .middot {
-  color: #ccc;
-}
-
-.task-info .price-icon {
-  height: 0.8rem;
-  margin-bottom: 3px;
-}
-
-.task-info .stats-icon {
-  height: 0.7rem;
-  margin-bottom: 3px;
-}
-
-.card.solved {
-  background: repeating-linear-gradient(
-    45deg,
-    /*#e2f7df,*/
-    #e8e8e8,
-    #e8e8e8 20px,
-    #f8f8f8 20px,
-    #f8f8f8 35px
-  );
-}
-
-.unread-count {
-  color: darkcyan;
+.container {
+	max-width: 2500px !important;
 }
 
-
-table {
-  border-collapse: collapse;
-}
-
-thead {
-  background-color: white;
-  border-bottom: 1px solid #ccc !important;
-}
-
-th, td {
-  border-top: none !important;
-  border-bottom: none !important;
-
-  font-size: 0.85rem;
-  font-weight: normal;
-  text-align: center;
-}
-
-.cat-adjacent {
-  border-right: none !important;
-}
-
-td {
-  border-right: 1px solid #eee !important;
-}
-
-.cat-end {
-  border-right: 1px solid #ddd !important;
-}
-
-th {
-  background-color: #eee;
-}
-
-th.category {
-  padding: 8px;
-}
-
-.task-prices th {
-  cursor: pointer;
-  font-size: 0.8rem;
-  padding: 6px 4px;
-  width: 45px;
-  text-align: center;
-}
-
-.task-prices .icon {
-  height: 0.5rem;
-  margin-bottom: 2px;
-}
-
-.task-prices .stats {
-  display: inline-block;
-  margin-top: 4px;
-  color: #999;
-  font-size: 0.65rem;
-}
-
-.task-prices th:hover {
-  text-decoration: underline;
-}
-
-.task-prices th:hover .stats {
-  text-decoration: none;
+#pda-login {
+	width: 40vw;
+	border-style: solid;
+	/*border-width: 80px 144px 83px 100px;*/
+	-moz-border-image: url(../img/pda_border_new.png) 80 144 83 100 stretch;
+	-webkit-border-image: url(../img/pda_border_new.png) 80 144 83 100 stretch;
+	-o-border-image: url(../img/pda_border_new.png) 80 144 83 100 stretch;
+	border-image: url(../img/pda_border_new.png) 80 144 83 100 fill stretch;
 }
 
-tr.even {
-  background-color: #fcfcfc;
+#pda {
+	height: 90vh;
+	width: 90vw;
+	border-style: solid;
+	border-width: 80px 144px 83px 100px;
+	-moz-border-image: url(../img/pda_border_new.png) 80 144 83 100 stretch;
+	-webkit-border-image: url(../img/pda_border_new.png) 80 144 83 100 stretch;
+	-o-border-image: url(../img/pda_border_new.png) 80 144 83 100 stretch;
+	border-image: url(../img/pda_border_new.png) 80 144 83 100 fill stretch;
 }
 
-tr.odd {
-  background-color: #f8f8f8;
+#pills-tab {
+	position: absolute;
+    bottom: 0.5%;
+    right: 0;
+    width: 100%
 }
 
-tr:hover {
-  background-color: #f3f3f3 !important;
+#pills-tabContent
+{
+	outline: 1px solid gray;
 }
 
-td {
-  vertical-align: middle !important;
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link
+{
+	color: #CFA846;
+	background-color: transparent;
 }
 
-td.team {
-  line-height: 1.35;
-  padding: 8px 4px;
-  text-align: left;
-  max-width: 200px;
+.list-group-item.active {
+	background-color: transparent;
+	border-color: transparent;
 }
 
-td.team div {
-  white-space: nowrap;
-  overflow-x: hidden;
+.list-group-item:first-child {
+	border-radius: 0;
 }
 
-td .region {
-  color: #aaa;
-  font-size: 0.75rem;
-}
-
-td .elapsed-time {
-  color: darkcyan;
-  font-size: 0.65rem;
-}
+/*Navbar & Nav's*/
 
-td .middot {
-  color: #ccc;
+.navbar {
+	height: 40px;
 }
 
-td.accepted {
-  color: darkcyan;
-  padding: 4px;
+.navbar-brand {
+	padding-top: 0;
 }
 
-td.accepted .time {
-  display: none;
-  color: #aaa;
-  font-size: 0.6rem;
+.nav-link {
+	color: #6c757d;
 }
 
-tr:hover td.accepted .time {
-  display: block;
+.nav-link:hover {
+	color: #6c757d;
 }
 
-tr.my-team {
-  background-color: #e8fae8;
+.green {
+	color: #17BF1C;
 }
 
-.scoreboard-toggle {
-  font-size: 0.85rem;
-}
 
-.scoreboard-toggle-row {
-  margin-top: -18px;
-}
+/*Overflow*/
 
-.scoreboard-toggle .custom-control-label::before, .scoreboard-toggle .custom-control-label::after {
-  margin-top: -1px;
-  height: 0.9rem;
-  width: 0.9rem;
+#overflow {
+	overflow-y: scroll;
+   	height: 70%;
 }
-
 
-.article-content {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  font-size: 0.97rem;
+#overflow::-webkit-scrollbar {
+    width: 1.2em;
 }
 
-@media (min-width: 1200px) {
-  .article-content {
-    margin-left: 75px;
-    margin-right: 100px;
-  }
+#overflow:::-webkit-scrollbar-button {
+	background-size: 100%;
+	background: #3b3d4a;
+    height: 10px;
+    width: 10px;
 }
-
-.article-content h2 {
-  font-size: 1.75rem;
+ 
+#overflow::-webkit-scrollbar-track {
+    background-color: #202226;
 }
-
-.article-content li {
-  margin-bottom: 15px;
+ 
+#overflow::-webkit-scrollbar-thumb {
+  background-color: #3B3D4A;
+  outline: 1px solid slategrey;
 }
 
+/*Image*/
 
-h2 {
-  font-size: 1.45rem;
+.img-task {
+	width: 100%;
+	/*border: 1px solid gray;*/
 }
 
-.notification-list .card {
-  max-width: 600px;
+.img-icon {
+	width: 48px;
+	border: 1px solid gray;
 }
 
-.notification.unread {
-  box-shadow: 0 .25rem .75rem rgba(255, 184, 51, 0.5);
+/*Forms*/
+.form-stalk {
+	border: 1px solid #3B3D4A;
+	border-radius: 0;
 }
 
-.notification .content {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  font-size: 0.89rem;
-}
-
-.notification .content a {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-               sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 0.84rem;
-}
+/*Bootstrap helper class*/
 
-.notification .content p:last-child {
-  margin-bottom: 0;
+.h-90 {
+	height: 90%;
 }
 
-.notification h3 {
-  font-size: 1.15rem;
-  line-height: 1.2;
+.py-0 {
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
+/*Btns*/
 
-.login-form {
-  font-size: 0.9rem;
+.btn {
+	border-radius: 0;
 }
 
-.login-form > .flex-column {
-  width: 350px;
+.btn-stalk
+{
+	background-color: #3B3D4A;
+	border: 1px solid #3B3D4A;
 }
 
+/*Colors*/
+/*Bg Colors*/
 
-.modal {
-  background-color: rgba(0, 0, 0, 0.3);
+.bg-trans {
+	background-color: transparent;
 }
 
-.modal-dialog {
-  max-width: 600px !important;
+.bg-stalk-light {
+	background-color: #3B3D4A;
 }
 
-.modal-content {
-  box-shadow: 0 .25rem 1.5rem rgba(0, 0, 0, 0.5);
+.bg-stalk-dark {
+	background-color: #131416;
 }
 
-.task .modal-body {
-  max-height: calc(100vh - 50px);
-  overflow-y: scroll;
+.list-group-item {
+	background-color: transparent;
 }
 
-.task .modal-task-content {
-  margin: 10px;
+.list-group-item:hover {
+	color: #fff;
+	background-color: transparent;
 }
 
-.task h3 {
-  font-size: 1.45rem;
-  line-height: 1.2;
-  margin-bottom: 1.3rem;
-}
-
-.task .content {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-  font-size: 0.94rem;
-}
+/*Feather Icons*/
 
-.task .content p {
-  margin-bottom: 1.3rem;
+.feather {
+  width: 14px;
+  height: 14px;
+/*  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;*/
 }
 
-.task .content a {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-               sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 0.89rem;
+.navbar-s {
+	border-top: 10px solid #131416 !important; 
 }
 
-.flag-submit-card .card-body {
-  background-color: #fcefdc;
-  padding: 15px;
-  font-size: 0.85rem;
-  line-height: 1.35;
+.corner {
+	display: block;
 }
 
-.flag-submit-card input {
-  width: calc(100% - 150px);
-  margin-left: 15px;
-}
-
-.flag-submit-card button {
-  width: 100px;
-  margin: 0 15px;
-}
+/*Alerts*/
 
 .alert {
-  color: black;
-  font-size: 0.85rem;
+	border-radius: 0;
 }
 
-.task .alert {
-  font-size: 0.8rem;
-  padding: 10px;
-  line-height: 1.35;
+.alert-info {
+	color: #fff;
+	background-color: #131416;
+	border-color: #3B3D4A;
 }
 
-
-footer {
-  margin: 0 !important;
-  padding: 24px;
-
-  position: absolute;
-  bottom: 0;
-  left: 84px;
-  width: calc(100% - 168px);
-  height: 120px;
+.alert-success {
+	color: #17BF1C;
+	background-color: #131416;
+	border-color: #17BF1C;
 }
 
-body > .container {
-  margin-bottom: 144px;
+.alert-warning {
+	color: #CFA846;
+	background-color: #131416;
+	border-color: #CFA846;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-
-.help-block {
-  color: darkred;
-  font-size: 0.8rem;
+.alert-danger {
+	color: #d43f3a;
+	background-color: #131416;
+	border-color: #d43f3a;
 }
