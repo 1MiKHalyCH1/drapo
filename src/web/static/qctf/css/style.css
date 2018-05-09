@@ -1,6 +1,6 @@
 html,body {
   height: 100%;
-  background: url(../img/pda_bg.jpg) no-repeat center center fixed; 
+  background: url(/static/qctf/img/pda_bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -207,30 +207,6 @@ html,body {
 
 /*Alerts*/
 
-.alert {
+.help-block {
 	border-radius: 0;
-}
-
-.alert-info {
-	color: #fff;
-	background-color: #131416;
-	border-color: #3B3D4A;
-}
-
-.alert-success {
-	color: #17BF1C;
-	background-color: #131416;
-	border-color: #17BF1C;
-}
-
-.alert-warning {
-	color: #CFA846;
-	background-color: #131416;
-	border-color: #CFA846;
-}
-
-.alert-danger {
-	color: #d43f3a;
-	background-color: #131416;
-	border-color: #d43f3a;
 }
