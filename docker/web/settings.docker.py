@@ -255,45 +255,11 @@ QCTF_CONTEST_ID = 1
 
 QCTF_CARD_LAYOUT = [
     [
-        ('permanent-302', '/static/statement_img/podifruxx.png'),
-        ('storage', '/static/statement_img/smvcnid.png'),
-    ],
-    [
-        ('make-some-noise', None),
-        ('cipher', None),
-        ('weird-video', None),
-    ],
-    [
-        ('getflagchar', '/static/statement_img/gohdjhr.png'),
-        ('minecrypt', '/static/statement_img/msslrrijc.png'),
-    ],
-    [
-        ('unpack-reverse', None),
-        ('cats-vs-dogs', None),
-        ('notemaster', None),
-    ],
-    [
-        ('bank', '/static/statement_img/blfpowdm.png'),
-        ('passengers-1', '/static/statement_img/psgrttry.png'),
-    ],
-    [
-        ('browser-mining', None),
-        ('auth-system', None),
-        ('obscure-archive', None),
-    ],
-    [
-        ('passengers-2', None),
-        ('python-vm', None),
-        ('quirky-casino', None),
+        ('cheryl', None)
     ],
 ]
 
 # Place tasks ordered by cost. They will be shown in the QCTF scoreboard in the same order.
 QCTF_TASK_CATEGORIES = {
-    'Crypto': ['cipher', 'minecrypt'],
-    'Forensics': ['weird-video', 'bank'],
-    'PPC': ['quirky-casino', 'browser-mining', 'cats-vs-dogs'],
-    'PWN': ['passengers-1', 'passengers-2'],
-    'Reverse': ['getflagchar', 'obscure-archive', 'unpack-reverse', 'python-vm'],
-    'Web': ['notemaster', 'permanent-302', 'make-some-noise', 'storage', 'auth-system'],
+    'Web': ['cheryl'],
 }
