@@ -35,7 +35,11 @@
               <br>
               {% csrf_token %}
                 <fieldset>
-                    {{ form|bootstrap }}
+                    {% for field in form %}
+                        <label class="text-white" for="{{ field.id }}">{{ field.label }}</label>
+                        {{ field }}
+                    {% endfor %}
+                    <br>
                     <div class="text-center">
                         <button type="submit" class="btn btn-secondary btn-stalk text-white">И в дамки</button>
                     </div>
