@@ -135,7 +135,8 @@ $(function () {
 function notifications(){
     $.post('/api/notifications/')
     .done(function (resp) {
-        var ul = $('<ul/>');
+        var ul = $('<ul/>')
+            .addClass('ul_journal');
         $.each(resp.notifications, function(i, v) {
             var li = $('<li/>')
                 .addClass(i === 0 ? "list-group-item text-white": "list-group-item text-muted")
