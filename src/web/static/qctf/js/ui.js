@@ -131,3 +131,27 @@ $(function () {
     updateRemainingTime();
     setInterval(updateRemainingTime, 1000);
 });
+
+function notifications(){
+    $.post('/api/notifications/')
+    .done(function (resp) {
+        var ul = $('<ul/>');
+        $.each(resp.notifications, function(i, v) {
+            var li = $('<li/>')
+                .addClass(i === 0 ? "list-group-item text-white": "list-group-item text-muted")
+                .append($('<h4/>')
+                    .text(v.title)
+                )
+                .append($('<p/>')
+                    .addClass("text-muted")
+                    .text(v.publish_time)
+                )
+                .append($('<p/>')
+                    .text(v.text)
+                );
+            
+            ul.append(li);
+        });
+        $("ul.ul_journal").replaceWith(ul);
+    });
+}

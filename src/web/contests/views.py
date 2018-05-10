@@ -11,6 +11,7 @@ from django.core import urlresolvers
 from django.db import transaction
 from django.db.models.query_utils import Q
 from django.http.response import Http404, HttpResponseNotFound, HttpResponseForbidden, JsonResponse
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import get_language
 from django.views.decorators.http import require_POST
@@ -29,7 +30,6 @@ import teams.models as teams_models
 import taskbased.categories.models as categories_models
 import taskbased.tasks.models as tasks_models
 import taskbased.tasks.forms as tasks_forms
-
 
 from collections import defaultdict
 
@@ -163,6 +163,7 @@ def qctf_unread_notifications_count(request):
     return JsonResponse({'unread_count': count})
 
 
+@require_POST
 def qctf_notifications(request):
     if not request.user.is_authenticated:
         return redirect(urlresolvers.reverse('users:login'))
@@ -180,14 +181,11 @@ def qctf_notifications(request):
     for notification in notifications:
         notification.is_unread = (notification.publish_time > last_read) if last_read else True
 
-    return render(request, 'contests/qctf_notifications.html', {
-        'current_contest': contest,
-
-        'contest': contest,
-        'participant' : participant,
-        'notifications': notifications,
-        'tasks_visible': tasks_visible,
-    })
+    notifications = [{ "title":x.title, "publish_time":x.publish_time, "text":x.text } for x in notifications]
+    res = {
+        "notifications": notifications
+    }
+    return JsonResponse(res)
 
 
 @staff_required
