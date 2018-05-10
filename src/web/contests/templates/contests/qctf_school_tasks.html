@@ -1,10 +1,7 @@
 {% load bootstrap %}
-{% load markdown_deux_tags %}
-{% load humanize %}
-{% load i18n %}
-{% load urlize_html %}
 {% load staticfiles %}
 {% load contest %}
+{% load dict_filters %}
 
 <!doctype html>
 <html lang="ru">
@@ -72,45 +69,21 @@
                       <nav class="navbar navbar-dark bg-stalk-light navbar-s sticky-top navbar-light corner mx-3 py-0">
                         <a class="navbar-brand font-weight-bold" href="#">Задачи</a>
                       </nav>
-
+                      
                       <div class="list-group" id="list-tab" role="tablist">
-                        <a class="list-group-item list-group-item-action" id="list-task02-list" data-toggle="list" href="#list-task02" role="tab" aria-controls="profile">
-                          
-                        <div class="media">
-                          <img class="img-icon mr-3" src="{% static '/qctf/img/icons/artifact.png' %}" alt="PH">
-                          <div class="media-body">
-                            <h5 class="mt-0 font-weight-bold">Координаты артефакта</h5>
-                            <p><i class="mr-1 green" data-feather="circle"></i>Найти артифакт по инфе Сидоровича</p>
-                            <p><i class="mr-1 green" data-feather="circle"></i>Передать координаты и артифакт</p>
+
+                          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+                            
+                          <div class="media">
+                            <img class="img-icon mr-3" src="{% static 'qctf/img/icons/documents.png' %}" alt="PH">
+                            <div class="media-body">
+                              <h5 class="mt-0 font-weight-bold">Документы военных</h5>
+                              <p><i class="mr-1 green" data-feather="circle"></i>Краткое описание задачи</p>
+                            </div>
                           </div>
-                        </div>
-
-                        </a>
-
-                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
-
-                        <div class="media">
-                          <img class="img-icon mr-3" src="{% static '/qctf/img/icons/pda.png' %}" alt="PH">
-                          <div class="media-body">
-                            <h5 class="mt-0 font-weight-bold">ПДА мертвого сталкера</h5>
-                            <p><i class="mr-1 green" data-feather="circle"></i>Краткое описание задачи</p>
-                          </div>
-                        </div>
-
-                        </a>
-
-                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
-                          
-                        <div class="media">
-                          <img class="img-icon mr-3" src="{% static '/qctf/img/icons/documents.png' %}" alt="PH">
-                          <div class="media-body">
-                            <h5 class="mt-0 font-weight-bold">Документы военных</h5>
-                            <p><i class="mr-1 green" data-feather="circle"></i>Краткое описание задачи</p>
-                          </div>
-                        </div>
-
-                        </a>
-                      </div>              
+  
+                          </a>
+                      </div> 
                     </div>
                     <div class="col-7 h-100 bg-stalk-dark" id="overflow">
 
@@ -119,8 +92,6 @@
                       </nav>
 
                       <div class="tab-content" id="nav-tabContent">
-
-                        <div class="tab-pane fade show active" id="list-task01" role="tabpanel" aria-labelledby="list-task01-list">...</div>
 
                         <div class="tab-pane fade px-3" id="list-task02" role="tabpanel" aria-labelledby="list-task02-list">
                         
