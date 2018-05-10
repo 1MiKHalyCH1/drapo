@@ -487,7 +487,8 @@ def qctf_submit_flag(request, task_id):
             not contest.has_task(task):
         return HttpResponseNotFound()
 
-    form = tasks_forms.AttemptForm(data=request.POST)
+    answer = request.POST.get('answer', None)
+    print('-------------ANSWER', answer, '--------------------')
     status = 'fail'
     if participant is None:
         message = 'Вы не зарегистрированы на это соревнование'
@@ -497,10 +498,9 @@ def qctf_submit_flag(request, task_id):
         message = 'К сожалению, соревнование уже закончилось'
     elif get_count_attempts_in_last_minute(contest, participant) >= settings.DRAPO_MAX_TRIES_IN_MINUTE:
         message = 'Вы отправляете слишком много флагов. Подождите некоторое время.'
-    elif not form.is_valid():
-        message = 'Форма некорректна'
+    elif answer is None:
+        message = 'Что-то пошло не так. Обратитесь к администратору!'
     else:
-        answer = form.cleaned_data['answer']
         attempt = tasks_models.Attempt(
             contest=contest,
             task=task,
@@ -519,8 +519,7 @@ def qctf_submit_flag(request, task_id):
                       'правильный ответ начинается с символов <code>QCTF</code>.'
         else:
             status = 'success'
-            message = 'Спасибо за интересные данные! ' \
-                      'Вознаграждение перечислено на ваш счёт.'
+            message = 'Верно!'
             #invalidate cache
             k1 = make_template_fragment_key('scoreboard', [request.user.id])
             k2 = make_template_fragment_key('tasks', [request.user.id])

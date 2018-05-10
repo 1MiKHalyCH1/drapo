@@ -18,36 +18,37 @@ function update_unread_notifications_count() {
 }
 
 function markAsSolved(task_id) {
-    $('.task-info-container[data-id="' + task_id + '"] .solved-label').show();
-    $('.card.task-info-container[data-id="' + task_id + '"]').addClass('solved');
+    $(".list-"+task_id+"-list")
+        .addClass('solved');
 }
 
-function submitFlag(modal_task, task_id, form) {
-    var alert = $(modal_task).find('.alert');
-    alert.removeClass('alert-danger').removeClass('alert-success').addClass('alert-dismissible')
-         .html('Проверка...')
-         .show();
-    var button = $(modal_task).find('button');
-    button.attr('disabled', true);
+function submitFlag(button, task_id, answer_input) {
+    var answer = answer_input.val();
+    answer_input
+        .val('')
+        .attr("disabled", "disabled")
+        .attr("placeholder", 'Проверка...');
+    button
+        .prop("disabled", true);    
 
-    $.post("/api/submit_flag/" + task_id + "/", form.serialize())
+    $.post("/api/submit_flag/" + task_id + "/", {'answer':answer})
         .done(function (response) {
             if (response.status === 'success') {
                 markAsSolved(task_id);
-                alert.removeClass('alert-dismissible').removeClass('alert-danger').addClass('alert-success');
-            } else
-                alert.removeClass('alert-dismissible').removeClass('alert-success').addClass('alert-danger');
-
-            alert.html(response.message)
-                 .show();
+                answer_input
+                    .attr("placeholder", 'Верно!');
+            } else {
+                answer_input
+                    .removeAttr("disabled")
+                    .attr("placeholder", 'Не верно!');
+            }
         })
         .fail(function () {
-            alert.removeClass('alert-dismissible').removeClass('alert-success').addClass('alert-danger')
-                 .html('Не удалось подключиться к серверу. Попробуйте ещё раз через некоторое время.')
-                 .show();
-        })
-        .always(function () {
-            button.removeAttr('disabled');
+            answer_input
+                    .removeAttr("disabled")
+                    .attr("placeholder", 'Не удалось подключиться к серверу. Попробуйте ещё раз через некоторое время.');
+            button
+            .prop("disabled", false);                    
         });
 }
 
@@ -119,11 +120,13 @@ $(function () {
     }
     toggle.change(toggleHideOtherRegions);
 
-    $('.modal-task').each(function (_, el) {
-        var task_id = $(this).data('id');
-        var form = $(el).find('.submit-flag-form');
-        form.submit(function (event) {
-            submitFlag(el, task_id, form);
+    $('.task-description').each(function (_, el) {
+        var task_id = $(this).attr('id');
+        var div = $(el).find('.submit-flag-div');
+        var answer_input = div.find('input[name=answer]');
+        var button = div.find('button');
+        button.click(function (event) {
+            submitFlag(button, task_id, answer_input);
             event.preventDefault();
         });
     });

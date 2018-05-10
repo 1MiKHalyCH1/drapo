@@ -92,8 +92,9 @@ font-family: "Arial Narrow", Arial, sans-serif;
 	color: #17BF1C;
 }
 
-.red {
-	color: #f00
+.stalk-light
+{
+  color: #3B3D4A;
 }
 
 
@@ -245,4 +246,22 @@ a {
 
 a:hover {
 	color: #17BF1C;
+}
+
+.list-group-item.completed
+{
+  color: #3B3D4A;
+  background-color: #202226;
+}
+
+.list-group-item.completed:hover
+{
+  color: #fff;
+  background-color: #202226;
+}
+
+.list-group-item.completed:focus
+{
+  color: #fff;
+  background-color: #202226;
 }
