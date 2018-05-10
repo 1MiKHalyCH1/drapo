@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>QCTF PDA</title>
+  </head>
+  <body>
+
+  <div class="container-fluid h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="container" id="pda">
+          <div class="row h-100" id="pda-row">
+            <div class="col-12 mt-3 mb-1">
+
+              <ul class="nav nav-fill nav-pills pl-3 pr-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active font-weight-bold" id="pills-task-tab" data-toggle="pill" href="#pills-task" role="tab" aria-controls="pills-task" aria-selected="true"><i class="mr-1" data-feather="file-text"></i>Задачи</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="mr-1" data-feather="file-text"></i>Ранги</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-weight-bold" id="pills-journal-tab" data-toggle="pill" href="#pills-journal" role="tab" aria-controls="pills-journal" aria-selected="false"><i class="mr-1 green" data-feather="file-text"></i>Журнал(1)</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link font-weight-bold" id="pills-help-tab" data-toggle="pill" href="#pills-help" role="tab" aria-controls="pills-help" aria-selected="false"><i class="mr-1" data-feather="file-text"></i>Справка</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link font-weight-bold" href="#">Выйти</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled font-weight-bold text-white" href="#">300 RU</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled font-weight-bold text-white" href="#">Таймер: --:--:--</a>
+                </li>
+              </ul>
+
+              <div class="tab-content h-90" id="pills-tabContent">
+                <div class="tab-pane h-100 fade show active corner" id="pills-task" role="tabpanel" aria-labelledby="pills-task-tab">
+                  <div class="row h-100 no-gutters">
+                    <div class="col-5 h-100 bg-stalk-dark br-r-15" id="overflow">
+
+                      <nav class="navbar navbar-dark bg-stalk-light navbar-s sticky-top navbar-light corner mx-3 py-0">
+                        <a class="navbar-brand font-weight-bold" href="#">Задачи</a>
+                      </nav>
+
+                      <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active" id="list-task01-list" data-toggle="list" href="#list-task01" role="tab" aria-controls="task01">
+                        
+                        <div class="media">
+                          <img class="mr-3" src="..." alt="PH">
+                          <div class="media-body">
+                            <h5 class="mt-0">Пример задания</h5>
+                            <p>Краткое описание задачи</p>
+                          </div>
+                        </div>
+
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" id="list-task02-list" data-toggle="list" href="#list-task02" role="tab" aria-controls="profile">
+                          
+                        <div class="media">
+                          <img class="img-icon mr-3" src="img/icons/artifact.png" alt="PH">
+                          <div class="media-body">
+                            <h5 class="mt-0 font-weight-bold">Координаты артефакта</h5>
+                            <p><i class="mr-1 green" data-feather="circle"></i>Найти артифакт по инфе Сидоровича</p>
+                            <p><i class="mr-1 green" data-feather="circle"></i>Передать координаты и артифакт</p>
+                          </div>
+                        </div>
+
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+
+                        <div class="media">
+                          <img class="img-icon mr-3" src="img/icons/pda.png" alt="PH">
+                          <div class="media-body">
+                            <h5 class="mt-0 font-weight-bold">ПДА мертвого сталкера</h5>
+                            <p><i class="mr-1 green" data-feather="circle"></i>Краткое описание задачи</p>
+                          </div>
+                        </div>
+
+                        </a>
+
+                        <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+                          
+                        <div class="media">
+                          <img class="img-icon mr-3" src="img/icons/documents.png" alt="PH">
+                          <div class="media-body">
+                            <h5 class="mt-0 font-weight-bold">Документы военных</h5>
+                            <p><i class="mr-1 green" data-feather="circle"></i>Краткое описание задачи</p>
+                          </div>
+                        </div>
+
+                        </a>
+                      </div>              
+                    </div>
+                    <div class="col-7 h-100 bg-stalk-dark" id="overflow">
+
+                      <nav class="navbar navbar-dark navbar-s bg-stalk-light sticky-top navbar-light mb-3 mx-3 corner py-0">
+                        <a class="navbar-brand font-weight-bold" href="#">Описание</a>
+                      </nav>
+
+                      <div class="tab-content" id="nav-tabContent">
+
+                        <div class="tab-pane fade show active" id="list-task01" role="tabpanel" aria-labelledby="list-task01-list">...</div>
+
+                        <div class="tab-pane fade px-3" id="list-task02" role="tabpanel" aria-labelledby="list-task02-list">
+                        
+                          <h4 class="text-white">Сидорович</h4>
+                          <p class="text-muted">12:31 05.05.2018</p>
+                          <p class="text-white">Короче, _teamname_, я вас спас и в благородство играть не буду. Выполните для меня пару заданий и мы в расчете. Заодно посмотрим, как быстро у вас бошка после амнезии прояснится. А по вашей теме постараюсь разузнать. Хрен его знает на кой ляд вам этот флаг сдался. Но я в чужие дела не лезу. Хотите поймать — значит есть за что.</p>
+
+                          <h4 class="text-white">Сидорович</h4>
+                          <p class="text-muted">12:45 05.05.2018</p>
+                          <img class="img-task pb-2" src="img/task_02.jpg" alt="PH">
+                          <p class="text-white">Да и ещё, я переслал вам на ПДА координаты одного... местечка. Будете проходить мимо, загляните.</p>
+                          <a href="#">pda://ctf.coordinates_0.01.14.6</a>
+
+
+                          <div class="input-group mt-3 mb-3">
+                            <input type="text" class="form-control form-stalk bg-stalk-dark" placeholder="Введите сообщение..." aria-label="Введите сообщение..." aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                              <button class="btn btn-secondary btn-stalk font-weight-bold btn-corner" type="button">Отправить</button>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>        
+                    </div>
+                  </div>
+                </div>
+              </div>
+                
+                <!-- Ranks Tab -->
+                <div class="tab-pane fade h-100" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                  <div class="row h-100 no-gutters">
+                    <div class="col-12 h-100 bg-stalk-dark" id="overflow">
+                      
+                      <nav class="navbar navbar-dark navbar-s bg-stalk-light sticky-top navbar-light mx-3 mb-3 corner py-0">
+                        <a class="navbar-brand font-weight-bold" href="#">Ранги</a>
+                      </nav>
+
+
+                      <div class="scoreboard-toggle ml-3">
+                        <input type="checkbox" id="customCheck1">
+                        <label class="text-white mb-2" for="customCheck1">Скрыть другие площадки</label>
+                      </div>
+
+                      <table class="table table-striped table-bordered table-hover table-dark">
+                        <thead>
+                        <!-- Headers -->
+                          <tr>
+                            <!-- Team Header -->
+                            <th scope="col"> </th>
+                            <th colspan="2" class="text-center" scope="col">Crypto</th>
+                            <!-- end -->
+                            <!-- Forensics Header -->
+                            <th colspan="2" class="text-center" scope="col">Forensics</th>
+                            <!-- end -->
+                            <!-- PPC Header -->
+                            <th colspan="2" class="text-center" scope="col">PPC</th>
+                            <!-- end -->
+                            <!-- Reverse Header -->
+                            <th colspan="5" class="text-center" scope="col">Reverse<br></th>
+                            <!-- end -->
+                            <!-- Web Header -->
+                            <th colspan="5" class="text-center" scope="col">Web</th>
+                            <!-- end -->
+                            <th class="text-right" scope="col"> </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <!-- Secondary pseudo-headers -->
+                          <tr>
+                            <!-- Team Name -->
+                            <th scope="row">Команды</th>
+                            <!-- Crypto (2 col) -->
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <!-- end -->
+                            <!-- Forensics (2 col) -->
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <!-- end -->
+                            <!-- PPC (2 col) -->
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <!-- end -->
+                            <!-- PPC (5 col) -->
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <!-- end -->
+                            <!-- Web (5 col) -->
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <td class="text-center text-muted">
+                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                            </td>
+                            <!-- end -->
+                            <td class="text-right font-weight-bold">Баллы</td>
+                          </tr>
+
+                          <tr>
+                            <!-- Team Name -->
+                            <th scope="row">Монолит<br><p class="font-weight-normal text-muted mb-0">Чернобыль</p>
+                            <p class="font-weight-normal d-inline green">1:25</p></th>
+                            <!-- Crypto (2 col) -->
+                            <td class="text-center green">●<br><p class="text-muted mb-0">1:02</p></td>
+                            <td class="text-center green">●</td>
+                            <!-- end -->
+                            <!-- Forensics (2 col) -->
+                            <td class="text-center"> </td>
+                            <td class="text-center green">●</td>
+                            <!-- end -->
+                            <!-- PPC (2 col) -->
+                            <td class="text-center green">●</td>
+                            <td class="text-center green">●</td>
+                            <!-- end -->
+                            <!-- PPC (5 col) -->
+                            <td class="text-center green">●</td>
+                            <td class="text-center green">●</td>
+                            <td class="text-center green">●</td>
+                            <td class="text-center green">●</td>
+                            <td class="text-center green">●</td>
+                            <!-- end -->
+                            <!-- Web (5 col) -->
+                            <td class="text-center green">●</td>
+                            <td class="text-center green">●</td>
+                            <td class="text-center green">●</td>
+                            <td class="text-center"> </td>
+                            <td class="text-center"> </td>
+                            <!-- end -->
+                            <td class="text-right">1200</td>
+                          </tr>
+                        </tbody>
+                      </table>                     
+
+      
+                </div>
+              </div>
+            </div>
+                
+                <!-- Journal Tab -->
+                <div class="tab-pane fade h-100" id="pills-journal" role="tabpanel" aria-labelledby="pills-journal-tab">
+                  <div class="row h-100 no-gutters">
+                    <div class="col-12 h-100 bg-stalk-dark" id="overflow">
+                      <nav class="navbar navbar-dark bg-stalk-light navbar-s sticky-top navbar-light corner mx-3 mb-3 py-0">
+                        <a class="navbar-brand font-weight-bold" href="#">Журнал</a>
+                      </nav>
+
+                      <ul class="list-group">
+                        <li class="list-group-item text-white">
+                          <h4>Оповещение #4003</h4>
+                          <p class="text-muted">12:35 05.05.2018</p>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, omnis doloribus consectetur, debitis maiores tempore, nisi quas fugit impedit, aperiam eos sequi dolores ex alias non inventore laboriosam ut officia.</p>
+                        </li>
+                        <li class="list-group-item text-muted">
+                          <h4>Оповещение #4002</h4>
+                          <p class="text-muted">10:03 05.05.2018</p>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis aspernatur, quas, explicabo voluptates, numquam, tenetur quod asperiores provident eos sunt amet totam ducimus consequatur esse magnam id temporibus sed laudantium.</p>
+                        </li>
+                        <li class="list-group-item text-muted">
+                          <h4>Оповещение #4001</h4>
+                          <p class="text-muted">08:10 05.05.2018</p>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus nesciunt ratione, accusamus similique eligendi. Repudiandae enim, adipisci. Qui reprehenderit, illo accusantium error iusto consectetur consequuntur corrupti. Reiciendis recusandae distinctio, veniam?</p>
+                        </li>
+                      </ul>
+
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Help Tab -->
+                <div class="tab-pane fade h-100" id="pills-help" role="tabpanel" aria-labelledby="pills-help-tab">
+                  <div class="row h-100 no-gutters">
+                    <div class="col-5 h-100 bg-stalk-dark" id="overflow">
+                      <nav class="navbar navbar-dark bg-stalk-light navbar-s sticky-top navbar-light corner mx-3 mb-3 py-0">
+                        <a class="navbar-brand font-weight-bold" href="#">Справка</a>
+                      </nav>
+                      <div class="list-group" id="list-tab" role="tablist">
+                        <a class="list-group-item list-group-item-action active py-0" id="list-help01-list" data-toggle="list" href="#list-help01" role="tab" aria-controls="help01">
+                        
+                        <div class="media">
+                          <div class="media-body">
+                            <p>Карманный справочник по выживанию в зоне</p>
+                          </div>
+                        </div>
+
+                        </a>
+
+                        <a class="list-group-item list-group-item-action py-0" id="list-help02-list" data-toggle="list" href="#list-help02" role="tab" aria-controls="help02">
+                        
+                        <div class="media">
+                          <div class="media-body">
+                            <p>Анекдоты</p>
+                          </div>
+                        </div>
+
+                        </a>
+
+                        </div>
+                    </div>
+                    <div class="col-7 h-100 bg-stalk-dark" id="overflow">
+                      <nav class="navbar navbar-dark bg-stalk-light navbar-s sticky-top navbar-light corner mx-3 mb-3 py-0">
+                        <a class="navbar-brand font-weight-bold" href="#">Описание</a>
+                      </nav>
+
+                      <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade pl-3 pr-3 show active" id="list-help01" role="tabpanel" aria-labelledby="list-help01-list">
+                          <h4 class="text-white">1. Не убий</h4>
+                          <p class="text-white">...</p>
+                          <h4 class="text-white">2. Не укради хабара ближнего своего</h4>
+                          <p class="text-white">...</p>
+                        </div>
+
+                        <div class="tab-pane fade pl-3 pr-3 show" id="list-help02" role="tabpanel" aria-labelledby="list-help02-list">
+                          <h4 class="text-white">Анекдот #481</h4>
+                          <p class="text-muted">Про штаны</p>
+                          <p class="text-white">
+                            — Блин, штаны упали.<br>
+                            — Ну и хер с ними.<br>
+                            — То-то и оно...
+
+                          <h4 class="text-white">Анекдот #269</h4>
+                          <p class="text-muted">Про доктора</p>
+                          <p class="text-white">Приходит Сталкер к костоправу и говорит:<br>
+                          — Доктор, мне постоянно снится один и тот же сон: как меня в саркофаге монстры разрывают. Что делать?<br>
+                          — А это вас Контролер предупреждает! В следущий раз поставьте ему бутылочку, а то еще, не ровен час, сон в явь превратится...<br>
+                          — Спасибо Доктор.<br>
+                          — Да не что, это тебе за Доктора спасибо — говорит Контроллер — мелочь, а приятно.</p>
+                          </p>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div> <!-- /Div Hell -->
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+
+    <!-- Corners -->
+    <script src="js/jquery.corner.js"></script>
+
+    <script type="text/javascript">
+      $('.corner').corner("20px tr bevel");
+      $('.btn-corner').corner("15px br bevel");
+    </script>
+
+    
+    <!-- Feather Icons -->
+    <script>
+      feather.replace()
+    </script>
+
+  </body>
+</html>

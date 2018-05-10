@@ -263,7 +263,7 @@ def qctf_tasks(request):
         'opened_tasks_ids': opened_tasks_ids,
         'tasks_visible': tasks_visible,
     })
-    return render(request, 'contests/qctf_tasks.html', data)
+    return render(request, 'contests/qctf_school_tasks.html', data)
 
 
 def prepare_task_popups(request, contest, participant):
