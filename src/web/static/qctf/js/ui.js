@@ -166,7 +166,7 @@ function scoreboard(){
     $.post('/api/scoreboard/')
     .done(function (resp) {
         var tbody = $('<tbody/>')
-            .addClass('scoreboard-table');
+            .addClass('scoreboard-table text-small');
         var prev_tbody = $('tbody.scoreboard-table');
         tbody
             .append($("tr.scoreboard-teams"));

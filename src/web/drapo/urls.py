@@ -30,6 +30,7 @@ urlpatterns = [
         contests.views.qctf_notifications, name='qctf_notifications'),
     url(r'^api/scoreboard/$', 
         contests.views.qctf_scoreboard, name='qctf_scoreboard'),
+    url(r'^scoreboard/$', contests.views.public_scoreboard, name='public_scoreboard'),
     # Non-QCTF URLs
 
     url(r'^contests/', include('contests.urls', namespace='contests')),

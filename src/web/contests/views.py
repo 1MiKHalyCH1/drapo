@@ -314,6 +314,61 @@ def prepare_task_popups(request, contest, participant):
         'task_solved_by': task_solved_by,
     }
 
+def public_scoreboard(request):
+    # TODO: Ask someone to review the scoreboard
+
+    contest = get_object_or_404(models.TaskBasedContest, pk=settings.QCTF_CONTEST_ID)
+    participant = contest.get_participant_for_user(request.user)
+    tasks_visible = request.user.is_authenticated and \
+                    (contest.is_started_for(participant) or request.user.is_staff)
+
+    scoreboard_key = make_template_fragment_key('scoreboard', [request.user.id])
+    tasks_key = make_template_fragment_key('tasks', [request.user.id])
+
+    data = prepare_task_popups(request, contest, participant)
+
+    task_by_name = data['task_by_name']
+    task_by_id = data['task_by_id']
+
+    task_columns = []
+    for category, names in sorted(settings.QCTF_TASK_CATEGORIES.items()):
+        ids = [task_by_name[name].id for name in names]
+        task_columns.append((category, ids))
+
+    visible_participants = list(models.IndividualParticipant.objects.select_related('user', 'region')
+                                .filter(contest_id=contest.id, is_visible_in_scoreboard=True))
+    participant_by_id = {p.id : p for p in visible_participants}
+    successful_attempts = contest.attempts.filter(is_correct=True).order_by('created_at')
+
+    first_success_time = defaultdict(dict)
+    total_scores = defaultdict(int)
+    completion_time = defaultdict(int)
+    for attempt in successful_attempts:
+        p_id, t_id = attempt.participant_id, attempt.task_id
+        if p_id not in participant_by_id:
+            continue
+        if t_id not in first_success_time[p_id]:
+            first_success_time[p_id][t_id] = attempt.created_at
+            total_scores[p_id] += task_by_id[attempt.task_id].max_score
+            completion_time[p_id] = attempt.created_at - contest.start_time_for(participant_by_id[attempt.participant_id])
+
+    visible_participants.sort(
+        key=lambda item: (-total_scores[item.id], completion_time[item.id], item.id))
+    visible_participants = [item for item in visible_participants
+                            if contest.is_started_for(item)]
+
+    data.update({
+        'current_contest': contest,
+        'participant': participant,
+
+        'first_success_time': first_success_time,
+        'visible_participants': visible_participants,
+        'task_columns': task_columns,
+        'tasks_visible': tasks_visible,
+        'total_scores': total_scores,
+    })
+
+    return render(request, 'contests/qctf_scoreboard.html', data)
 
 @require_POST
 def qctf_scoreboard(request):
