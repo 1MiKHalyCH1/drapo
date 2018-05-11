@@ -255,11 +255,36 @@ QCTF_CONTEST_ID = 1
 
 QCTF_CARD_LAYOUT = [
     [
-        ('cheryl', None)
-    ],
+        ('anomaly', None),
+        ('bar', None),
+        ('red-button', None),
+        ('stash', None),
+        ('hard-pwn', None),
+        ('oil', None),
+        ('secure-library', None),
+        ('dfa', None),
+        ('flagogenerator', None),
+        ('g-codes', None),
+        ('blind-robot', None),
+        ('broken-transmitter', None),
+        ('cheryl', None),
+        ('chef', None),
+        ('zip-crypt', None),
+        ('elite-speaking', None),
+        ('old-friend', None),
+        ('qr-pano', None)
+    ]
 ]
 
 # Place tasks ordered by cost. They will be shown in the QCTF scoreboard in the same order.
 QCTF_TASK_CATEGORIES = {
-    'Web': ['cheryl'],
+    'Stegano': ['anomaly', 'bar'],
+    'Web': ['red-button', 'stash'],
+    'Pwn': ['hard-pwn', 'oil', 'secure-library'],
+    'Reverse': ['dfa', 'flagogenerator', 'g-codes'],
+    'PPC': ['blind-robot', 'broken-transmitter', 'cheryl'],
+    'Crypto': ['chef', 'zip-crypt'],
+    'Welcome': ['elite-speaking'],
+    'Misc': ['old-friend'],
+    'Joy': ['qr-pano']
 }
