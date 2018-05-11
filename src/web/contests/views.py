@@ -258,9 +258,13 @@ def qctf_tasks(request):
         'participant': participant,
 
         'layout': settings.QCTF_CARD_LAYOUT,
+        'categories': sorted(settings.QCTF_TASK_CATEGORIES.items()),
         'opened_tasks_ids': opened_tasks_ids,
         'tasks_visible': tasks_visible,
     })
+    print('---------------------------------')
+    print(data)
+    print('---------------------------------')
     return render(request, 'contests/qctf_school_tasks.html', data)
 
 
@@ -311,7 +315,9 @@ def prepare_task_popups(request, contest, participant):
     }
 
 
+@require_POST
 def qctf_scoreboard(request):
+    print(request)
     # TODO: Ask someone to review the scoreboard
 
     contest = get_object_or_404(models.TaskBasedContest, pk=settings.QCTF_CONTEST_ID)
@@ -354,18 +360,23 @@ def qctf_scoreboard(request):
     visible_participants = [item for item in visible_participants
                             if contest.is_started_for(item)]
 
-    data.update({
-        'current_contest': contest,
-        'participant': participant,
+    res = []
+    for team in visible_participants:
+        team_res = dict()
+        team_res["team_name"] = team.name
+        team_solves = []
+        for _, tasks in sorted(settings.QCTF_TASK_CATEGORIES.items()):
+            for task_name in tasks:
+                task = data['task_by_name'][task_name]
+                team_solves.append(team.id in data['task_solved_by'][task.id])
+        team_res["team_solves"] = team_solves
+        print(team.id)
+        team_res["total_scores"] = total_scores[team.id]
+        
+        
+        res.append(team_res)
 
-        'first_success_time': first_success_time,
-        'visible_participants': visible_participants,
-        'task_columns': task_columns,
-        'tasks_visible': tasks_visible,
-        'total_scores': total_scores,
-    })
-
-    return render(request, 'contests/qctf_scoreboard.html', data)
+    return JsonResponse({'scoreboard':res})    
 
 
 def qctf_rules(request):
@@ -488,7 +499,6 @@ def qctf_submit_flag(request, task_id):
         return HttpResponseNotFound()
 
     answer = request.POST.get('answer', None)
-    print('-------------ANSWER', answer, '--------------------')
     status = 'fail'
     if participant is None:
         message = 'Вы не зарегистрированы на это соревнование'

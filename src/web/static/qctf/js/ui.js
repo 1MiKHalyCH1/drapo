@@ -41,6 +41,8 @@ function submitFlag(button, task_id, answer_input) {
                 answer_input
                     .removeAttr("disabled")
                     .attr("placeholder", 'Не верно!');
+                button
+                    .prop("disabled", true); 
             }
         })
         .fail(function () {
@@ -48,7 +50,7 @@ function submitFlag(button, task_id, answer_input) {
                     .removeAttr("disabled")
                     .attr("placeholder", 'Не удалось подключиться к серверу. Попробуйте ещё раз через некоторое время.');
             button
-            .prop("disabled", false);                    
+                .prop("disabled", false);                    
         });
 }
 
@@ -157,5 +159,50 @@ function notifications(){
             ul.append(li);
         });
         $("ul.ul_journal").replaceWith(ul);
+    });
+}
+
+function scoreboard(){
+    $.post('/api/scoreboard/')
+    .done(function (resp) {
+        var tbody = $('<tbody/>')
+            .addClass('scoreboard-table');
+        var prev_tbody = $('tbody.scoreboard-table');
+        prev_tbody
+            .slice(1)
+            .each(function(i, v){
+                tbody.append(v);
+            });
+        $.each(resp.scoreboard, function(i, team) {
+            var tr = $('<tr/>');
+            tr.append($('<th/>')
+                .attr('scope','raw')
+                .text(team.team_name)
+            );
+            $.each(team.team_solves, function(i, task) {
+                if (task) {
+                    tr
+                        .append($('<td/>')
+                            .addClass('text-center green')
+                            .text('●')
+                        );
+                }
+                else {
+                    tr
+                        .append($('<td/>')
+                            .addClass('text-center')
+                    );
+                }
+            });
+            tr
+                .append($('<td/>')
+                    .addClass('text-right')
+                    .text(team.total_scores)
+                );
+            tbody
+                .append(tr)
+        });
+        
+        prev_tbody.replaceWith(tbody);
     });
 }

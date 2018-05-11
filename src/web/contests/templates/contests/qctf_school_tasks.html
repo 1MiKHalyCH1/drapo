@@ -39,10 +39,10 @@
                   <a class="nav-link active font-weight-bold" id="pills-task-tab" data-toggle="pill" href="#pills-task" role="tab" aria-controls="pills-task" aria-selected="true"><i class="mr-1" data-feather="file-text"></i>Задачи</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link font-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"><i class="mr-1" data-feather="file-text"></i>Ранги</a>
+                  <a class="nav-link font-weight-bold" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false"  onclick="scoreboard()"><i class="mr-1" data-feather="file-text"></i>Ранги</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link font-weight-bold" id="pills-journal-tab" data-toggle="pill" href="#pills-journal" role="tab" aria-controls="pills-journal" aria-selected="false" onclick="notifications()"><i class="mr-1 green" data-feather="file-text"></i>Журнал</a>
+                  <a class="nav-link font-weight-bold" id="pills-journal-tab" data-toggle="pill" href="#pills-journal" role="tab" aria-controls="pills-journal" aria-selected="false" onclick="notifications()"><i class="mr-1" data-feather="file-text"></i>Журнал</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link font-weight-bold" id="pills-help-tab" data-toggle="pill" href="#pills-help" role="tab" aria-controls="pills-help" aria-selected="false"><i class="mr-1" data-feather="file-text"></i>Правила</a>
@@ -117,66 +117,38 @@
 
                       <div class="tab-content" id="nav-tabContent">
 
-              <div class="tab-pane fade px-3" id="list-task02" role="tabpanel" aria-labelledby="list-task02-list">
-              
-                <h4 class="text-white">Сидорович</h4>
-                <p class="text-muted">12:31 05.05.2018</p>
-                <p class="text-white">Короче, _teamname_, я вас спас и в благородство играть не буду. Выполните для меня пару заданий и мы в расчете. Заодно посмотрим, как быстро у вас бошка после амнезии прояснится. А по вашей теме постараюсь разузнать. Хрен его знает на кой ляд вам этот флаг сдался. Но я в чужие дела не лезу. Хотите поймать — значит есть за что.</p>
+                      {% if tasks_visible %}
+                      {% for row in layout %}
+                      {% for task_name, img_src in row %}
+                      {% with task=task_by_name|item:task_name %}
+                      {% if task.id in statements and task.id in opened_tasks_ids %}
+                      {% with stmt=statements|item:task.id %}  
+                      <div class="tab-pane fade px-3 task-description" id="{{ task.id }}" role="tabpanel" aria-labelledby="list-{{ task.id }}-list">
+                              
 
-                <h4 class="text-white">Сидорович</h4>
-                <p class="text-muted">12:45 05.05.2018</p>
-                <img class="img-task pb-2" src="{% static '/qctf/img/icons/artifact.png' %}" alt="PH">
-                <p class="text-white">Да и ещё, я переслал вам на ПДА координаты одного... местечка. Будете проходить мимо, загляните.</p>
-                <a href="#">pda://ctf.coordinates_0.01.14.6</a>
+                        <h4 class="text-white">{{ stmt.title }}</h4>
+                        <p class="text-muted">{{ category_by_task_name|item:task.name }} : {{ task.max_score }}</p>
+                        <div class="text-white">{{ stmt.statement|markdown }}</div>
 
-                <div class="input-group mt-3 mb-3">
-                  <input type="text" class="form-control form-stalk bg-stalk-dark" placeholder="Введите сообщение..." aria-label="Введите сообщение..." aria-describedby="basic-addon2">
-                  <div class="input-group-append">
-                    <button class="btn btn-secondary btn-stalk font-weight-bold btn-corner" type="button">Отправить</button>
-                  </div>
-                </div>
-
-              </div>
-                        
-                        
-
-              {% if tasks_visible %}
-              {% for row in layout %}
-              {% for task_name, img_src in row %}
-              {% with task=task_by_name|item:task_name %}
-              {% if task.id in statements and task.id in opened_tasks_ids %}
-              {% with stmt=statements|item:task.id %}  
-              
-              <div class="tab-pane fade px-3 task-description" id="{{ task.id }}" role="tabpanel" aria-labelledby="list-{{ task.id }}-list">
-                      
-
-                <h4 class="text-white">{{ stmt.title }}</h4>
-                <p class="text-muted">{{ category_by_task_name|item:task.name }} : {{ task.max_score }}</p>
-                <div class="text-white">{{ stmt.statement|markdown }}</div>
-
-                <div class="submit-flag-div">
-                    <div class="input-group mt-3 mb-3">
-                    {% if task.id in solved_tasks_ids %}
-                    <p class="text-white">Уже решено!</p>
-                    {% else %}
-                    <input type="text" class="form-control form-stalk bg-stalk-dark" name="answer" placeholder="Введите сообщение..." aria-label="Введите сообщение..." aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-secondary btn-stalk font-weight-bold btn-corner" type="submit">Отправить</button>
-                    </div>
-                    {% endif %}                    
-                  </div>
-                </div>
-              </div>
-              {% endwith %}
-              {% endif %}
-              {% endwith %}
-              {% endfor %}
-              {% endfor %}
-              {% endif %}
-
-
-
-
+                        <div class="submit-flag-div">
+                            <div class="input-group mt-3 mb-3">
+                            {% if task.id in solved_tasks_ids %}
+                            <p class="text-white">Уже решено!</p>
+                            {% else %}
+                            <input type="text" class="form-control form-stalk bg-stalk-dark" name="answer" placeholder="Введите сообщение..." aria-label="Введите сообщение..." aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                              <button class="btn btn-secondary btn-stalk font-weight-bold btn-corner" type="submit">Отправить</button>
+                            </div>
+                            {% endif %}                    
+                          </div>
+                        </div>
+                      </div>
+                      {% endwith %}
+                      {% endif %}
+                      {% endwith %}
+                      {% endfor %}
+                      {% endfor %}
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -191,137 +163,37 @@
                         <a class="navbar-brand font-weight-bold" href="#">Ранги</a>
                       </nav>
 
-
-                      <div class="scoreboard-toggle ml-3">
-                        <input type="checkbox" id="customCheck1">
-                        <label class="text-white mb-2" for="customCheck1">Скрыть другие площадки</label>
-                      </div>
-
                       <table class="table table-striped table-bordered table-hover table-dark">
                         <thead>
                         <!-- Headers -->
                           <tr>
-                            <!-- Team Header -->
                             <th scope="col"> </th>
-                            <th colspan="2" class="text-center" scope="col">Crypto</th>
-                            <!-- end -->
-                            <!-- Forensics Header -->
-                            <th colspan="2" class="text-center" scope="col">Forensics</th>
-                            <!-- end -->
-                            <!-- PPC Header -->
-                            <th colspan="2" class="text-center" scope="col">PPC</th>
-                            <!-- end -->
-                            <!-- Reverse Header -->
-                            <th colspan="5" class="text-center" scope="col">Reverse<br></th>
-                            <!-- end -->
-                            <!-- Web Header -->
-                            <th colspan="5" class="text-center" scope="col">Web</th>
-                            <!-- end -->
-                            <th class="text-right" scope="col"> </th>
+                            {% for category, tasks in categories %}
+                            <th colspan="{{ tasks|length }}" class="text-center" scope="col">{{ category }}</th>
+                            {% endfor %}
+                            <th class="text-right" scope="col"> </th>                            
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="scoreboard-table">
                         <!-- Secondary pseudo-headers -->
                           <tr>
                             <!-- Team Name -->
                             <th scope="row">Команды</th>
-                            <!-- Crypto (2 col) -->
+                            <!-- Tasks -->
+                            {% for category, tasks in categories %}
+                            {% for task_name in tasks %}
+                            {% with task=task_by_name|item:task_name %}
                             <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
+                              <i data-feather="dollar-sign"></i>{{ task.max_score }}<br><i class="mr-1" data-feather="users"></i>{{ task_solved_by|item:task.id|length }}
                             </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <!-- end -->
-                            <!-- Forensics (2 col) -->
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <!-- end -->
-                            <!-- PPC (2 col) -->
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <!-- end -->
-                            <!-- PPC (5 col) -->
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <!-- end -->
-                            <!-- Web (5 col) -->
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
-                            <td class="text-center text-muted">
-                              <i data-feather="dollar-sign"></i>100 <br><i class="mr-1" data-feather="users"></i>100
-                            </td>
+                            {% endwith %}
+                            {% endfor %}
+                            {% endfor %}
                             <!-- end -->
                             <td class="text-right font-weight-bold">Баллы</td>
                           </tr>
-
-                          <tr>
-                            <!-- Team Name -->
-                            <th scope="row">Монолит<br><p class="font-weight-normal text-muted mb-0">Чернобыль</p>
-                            <p class="font-weight-normal d-inline green">1:25</p></th>
-                            <!-- Crypto (2 col) -->
-                            <td class="text-center green">●<br><p class="text-muted mb-0">1:02</p></td>
-                            <td class="text-center green">●</td>
-                            <!-- end -->
-                            <!-- Forensics (2 col) -->
-                            <td class="text-center"> </td>
-                            <td class="text-center green">●</td>
-                            <!-- end -->
-                            <!-- PPC (2 col) -->
-                            <td class="text-center green">●</td>
-                            <td class="text-center green">●</td>
-                            <!-- end -->
-                            <!-- PPC (5 col) -->
-                            <td class="text-center green">●</td>
-                            <td class="text-center green">●</td>
-                            <td class="text-center green">●</td>
-                            <td class="text-center green">●</td>
-                            <td class="text-center green">●</td>
-                            <!-- end -->
-                            <!-- Web (5 col) -->
-                            <td class="text-center green">●</td>
-                            <td class="text-center green">●</td>
-                            <td class="text-center green">●</td>
-                            <td class="text-center"> </td>
-                            <td class="text-center"> </td>
-                            <!-- end -->
-                            <td class="text-right">1200</td>
-                          </tr>
                         </tbody>
                       </table>                     
-
-      
                 </div>
               </div>
             </div>

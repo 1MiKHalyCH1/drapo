@@ -22,15 +22,14 @@ import users.forms
 
 urlpatterns = [
     url(r'^$', contests.views.qctf_tasks, name='home'),
-    url(r'^rules/$', contests.views.qctf_rules, name='qctf_rules'),
-    url(r'^scoreboard/$', contests.views.qctf_scoreboard, name='qctf_scoreboard'),
     url(r'^api/unread_notifications_count/$',
         contests.views.qctf_unread_notifications_count, name='qctf_unread_notifications_count'),
     url(r'^api/submit_flag/(?P<task_id>\d+)/$',
         contests.views.qctf_submit_flag, name='qctf_submit_flag'),
     url(r'^api/notifications/$', 
         contests.views.qctf_notifications, name='qctf_notifications'),
-
+    url(r'^api/scoreboard/$', 
+        contests.views.qctf_scoreboard, name='qctf_scoreboard'),
     # Non-QCTF URLs
 
     url(r'^contests/', include('contests.urls', namespace='contests')),
