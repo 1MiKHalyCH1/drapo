@@ -265,3 +265,7 @@ a:hover {
   color: #fff;
   background-color: #202226;
 }
+
+code {
+	color: #CFA846;
+}

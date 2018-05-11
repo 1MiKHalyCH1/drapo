@@ -168,11 +168,8 @@ function scoreboard(){
         var tbody = $('<tbody/>')
             .addClass('scoreboard-table');
         var prev_tbody = $('tbody.scoreboard-table');
-        prev_tbody
-            .slice(1)
-            .each(function(i, v){
-                tbody.append(v);
-            });
+        tbody
+            .append($("tr.scoreboard-teams"));
         $.each(resp.scoreboard, function(i, team) {
             var tr = $('<tr/>');
             tr.append($('<th/>')
@@ -202,7 +199,6 @@ function scoreboard(){
             tbody
                 .append(tr)
         });
-        
         prev_tbody.replaceWith(tbody);
     });
 }
