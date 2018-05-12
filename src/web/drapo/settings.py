@@ -235,19 +235,20 @@ QCTF_CARD_LAYOUT = [
         ('old-friend', None),
         ('qr-pano', None),
         ('usbrip', None),
-        ('broadcast', None)
+        ('broadcast', None),
+        ('terminal', None),
+        ('unicode', None)
     ]
 ]
 
 # Place tasks ordered by cost. They will be shown in the QCTF scoreboard in the same order.
 QCTF_TASK_CATEGORIES = {
     'Stegano': ['anomaly', 'bar'],
-    'Web': ['red-button', 'stash', 'broadcast'],
+    'Web': ['red-button', 'stash', 'broadcast', 'terminal'],
     'Pwn': ['hard-pwn', 'oil', 'secure-library'],
-    'Reverse': ['dfa', 'flagogenerator', 'g-codes'],
+    'Reverse': ['dfa', 'flagogenerator'],
     'PPC': ['blind-robot', 'broken-transmitter', 'cheryl'],
     'Crypto': ['chef', 'zip-crypt'],
-    'Welcome': ['elite-speaking'],
-    'Misc': ['old-friend', 'usbrip'],
-    'Joy': ['qr-pano']
+    'Welcome': ['elite-speaking', 'unicode'],
+    'Misc': ['old-friend', 'usbrip', 'qr-pano', 'g-codes'],
 }

@@ -154,6 +154,10 @@ html,body {
 	height: 90%;
 }
 
+.h-95 {
+	height: 95%;
+}
+
 .py-0 {
 	padding-top: 0px;
 	padding-bottom: 0px;

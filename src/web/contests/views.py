@@ -372,7 +372,6 @@ def public_scoreboard(request):
 
 @require_POST
 def qctf_scoreboard(request):
-    print(request)
     # TODO: Ask someone to review the scoreboard
 
     contest = get_object_or_404(models.TaskBasedContest, pk=settings.QCTF_CONTEST_ID)
@@ -425,7 +424,6 @@ def qctf_scoreboard(request):
                 task = data['task_by_name'][task_name]
                 team_solves.append(team.id in data['task_solved_by'][task.id])
         team_res["team_solves"] = team_solves
-        print(team.id)
         team_res["total_scores"] = total_scores[team.id]
         
         
@@ -579,9 +577,7 @@ def qctf_submit_flag(request, task_id):
         if not attempt.is_checked:
             message = 'Проверяющая система не может проверить ваш флаг в данный момент'
         elif not attempt.is_correct:
-            message = 'Эта строка не является правильным ответом на задание. ' \
-                      'Попробуйте найти что&#8209;нибудь ещё. Обратите внимание, что ' \
-                      'правильный ответ начинается с символов <code>QCTF</code>.'
+            message = 'Эта строка не является правильным ответом на задание!'
         else:
             status = 'success'
             message = 'Верно!'
@@ -590,7 +586,7 @@ def qctf_submit_flag(request, task_id):
             k2 = make_template_fragment_key('tasks', [request.user.id])
             cache.delete_many([k1, k2])
 
-    return JsonResponse({'status': status, 'message': message})
+    return JsonResponse({'status': status, 'message': message, 'score':participant.get_current_score()})
 
 
 @staff_required

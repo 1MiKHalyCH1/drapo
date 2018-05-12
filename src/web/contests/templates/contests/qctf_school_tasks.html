@@ -32,7 +32,7 @@
     <div class="row h-100 justify-content-center align-items-center">
         <div class="container" id="pda">
           <div class="row h-100" id="pda-row">
-            <div class="col-12 mt-3 mb-1">
+            <div class="col-12 mt-3 mb-1 h-95">
 
               <ul class="nav nav-fill nav-pills pl-3 pr-3" id="pills-tab" role="tablist">
                 <li class="nav-item">
@@ -55,10 +55,15 @@
                       {% csrf_token %}
                       <input type="hidden" name="next" value="{{ request.path }}">
                     </form>
-                  <a class="nav-link disabled font-weight-bold text-white" href="#">300 RU</a>
+                  <a class="nav-link disabled font-weight-bold text-white participant-score" href="#">{{ participant.get_current_score|default_if_none:"0" }} RU</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled font-weight-bold text-white" href="#">Таймер: --:--:--</a>
+                  {% if current_contest|is_finished_for:participant %}
+                    <a class="nav-link disabled font-weight-bold text-white" href="#">Соревнование окончено</a>
+                  {% elif current_contest|is_running_for:participant %}
+                    <div hidden="hidden" id="contest-finish-time">{{ current_contest|finish_time_for:participant|date:"U" }}</div>
+                    <a class="nav-link disabled font-weight-bold text-white" id="remaining-time" href="#"></a>
+                  {% endif %}
                 </li>
               </ul>
 
@@ -85,7 +90,7 @@
                               {% with stmt=statements|item:task.id %}                
                               <h5 class="mt-0 font-weight-bold">{{ stmt.title }}</h5>
                               {% endwith %}
-                              <p><i class="mr-1 {% if task.id in solved_tasks_ids %}stalk-light{% else %}green{% endif %}" data-feather="circle"></i>{{ category_by_task_name|item:task.name }} : {{ task.max_score }}</p>
+                              <p><i class="mr-1 {% if task.id in solved_tasks_ids %}stalk-light{% else %}green{% endif %}" fill="stalk-light" data-feather="circle"></i>{{ category_by_task_name|item:task.name }} : {{ task.max_score }}</p>
                             </div>
                           </div>
                         </a>
@@ -131,7 +136,7 @@
                         <div class="text-white">{{ stmt.statement|markdown }}</div>
 
                         <div class="submit-flag-div">
-                            <div class="input-group mt-3 mb-3">
+                            <div class="input-group mt-3 mb-3 task-form-{{ task.id }}">
                             {% if task.id in solved_tasks_ids %}
                             <p class="text-white">Уже решено!</p>
                             {% else %}
@@ -184,7 +189,7 @@
                             {% for task_name in tasks %}
                             {% with task=task_by_name|item:task_name %}
                             <td class="text-center text-muted">
-                              <i data-feather="dollar-sign" class="feather-sm"></i>{{ task.max_score }}<br><i data-feather="users" class="mr-1 feather-sm"></i>{{ task_solved_by|item:task.id|length }}
+                              <i class="feather-sm"></i>{{ task.max_score }}<br><i data-feather="users" class="mr-1 feather-sm"></i>{{ task_solved_by|item:task.id|length }}
                             </td>
                             {% endwith %}
                             {% endfor %}
@@ -227,7 +232,7 @@
                         </li>
                         <li class="list-group-item text-white">
                             2) Командам будет предложено решить задания. Ответом является строка вида
-                            <code>QCTF{[A-Za-z0-9_]+}</code> (она называется флаг). Флаг нужно отправить в проверяющую систему в окне,
+                            <code>QCTF{...}</code> (она называется флаг). Флаг нужно отправить в проверяющую систему в окне,
                             соответствующем решаемому заданию. Никакие другие строки не могут являться правильным ответом.
                         </li>
                         <li class="list-group-item text-white">

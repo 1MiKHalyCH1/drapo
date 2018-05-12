@@ -18,8 +18,10 @@ function update_unread_notifications_count() {
 }
 
 function markAsSolved(task_id) {
-    $(".list-"+task_id+"-list")
-        .addClass('solved');
+    $("#list-"+task_id+"-list")
+        .addClass('completed');
+    $(".task-form-"+task_id)
+        .html('<p class="text-white">Верно!</p>');
 }
 
 function submitFlag(button, task_id, answer_input) {
@@ -34,16 +36,18 @@ function submitFlag(button, task_id, answer_input) {
     $.post("/api/submit_flag/" + task_id + "/", {'answer':answer})
         .done(function (response) {
             if (response.status === 'success') {
-                markAsSolved(task_id);
                 answer_input
-                    .attr("placeholder", 'Верно!');
+                    .attr("placeholder", response.message);
+                markAsSolved(task_id);                    
             } else {
                 answer_input
                     .removeAttr("disabled")
-                    .attr("placeholder", 'Не верно!');
+                    .attr("placeholder", response.message);
                 button
-                    .prop("disabled", true); 
+                    .prop("disabled", false); 
             }
+            $('.participant-score')
+                .text('' + response.score + ' RU'); 
         })
         .fail(function () {
             answer_input
@@ -78,7 +82,7 @@ function updateRemainingTime() {
     var hours = Math.floor(totalMinutes / 60);
 
     var timeRepr = padLeft(hours, 2) + ':' + padLeft(minutes, 2) + ':' + padLeft(seconds, 2);
-    remainingTimeSpan.text('Осталось: ' + timeRepr);
+    remainingTimeSpan.text(timeRepr);
 }
 
 function toggleHideOtherRegions() {
