@@ -10,10 +10,9 @@ function hideModal() {
 function update_unread_notifications_count() {
     return $.get("/api/unread_notifications_count/", function(data) {
         if (data['unread_count'])
-            t = '(' + data['unread_count'] + ')';
+            $('.journal-link').addClass('green');
         else
-            t = '';
-        $(".unread-count").html(t);
+            $('.journal-link').removeClass('green');
     });
 }
 
@@ -117,7 +116,7 @@ $(function () {
     $('button.close').click(hideModal);
     
     update_unread_notifications_count();
-    setInterval(update_unread_notifications_count, 3*60*1000);
+    setInterval(update_unread_notifications_count, 2*60*1000);
 
     var toggle = $('#hide-other-regions');
     if (localStorage['hide-other-regions'] === "true") {
@@ -142,6 +141,7 @@ $(function () {
 });
 
 function notifications(){
+    $('.journal-link').removeClass('green');
     $.post('/api/notifications/')
     .done(function (resp) {
         var ul = $('<ul/>')
