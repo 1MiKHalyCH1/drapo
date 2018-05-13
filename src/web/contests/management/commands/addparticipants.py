@@ -4,6 +4,7 @@ from users.models import User
 from contests.models import Contest, ContestRegion, IndividualParticipant
 
 import yaml
+import logging
 
 
 class Command(BaseCommand):
@@ -14,17 +15,24 @@ class Command(BaseCommand):
         parser.add_argument('filename', type=str)
 
     def handle(self, *args, **options):
+        self.logger = logging.getLogger('add_participant')
+        self.logger.setLevel(logging.INFO)
         contest_id = options['contest_id']
         try:
             contest = Contest.objects.get(pk=contest_id)
         except Contest.DoesNotExist:
             raise CommandError('Contest "%s" does not exist' % contest_id)
+            
+        self.logger.info('Add participants to contest "%s"' % contest)
 
         with open(options['filename'], encoding='utf-8') as file:
             participants = yaml.load(file)
+            
+        self.logger.info('Loaded %d participant(s)' % len(participants))
 
         with transaction.atomic():
             for p in participants:
+                self.logger.info('Try to add participant %s' % p)
                 self.add_participant(p, contest)
                 self.stdout.write(self.style.SUCCESS('Registered user %s to contest' % p['username']))
 
