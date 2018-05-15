@@ -10,7 +10,7 @@ from django.views.decorators.http import require_POST
 
 from . import forms
 from . import models
-from contests.models import Contest, IndividualParticipant
+from contests.models import Contest, IndividualParticipant, ContestRegion
 
 
 def profile(request, user_id):
@@ -78,10 +78,18 @@ def register(request):
                     confirmation = models.EmailConfirmation(user=user, is_confirmed=True)
                     confirmation.save()
 
-                    IndividualParticipant(
-                        contest=Contest.objects.get(id=settings.QCTF_CONTEST_ID),
-                        user=user
-                    ).save()
+                    contest = Contest.objects.get(id=settings.QCTF_CONTEST_ID)
+                    region = ContestRegion.objects.get(id=27, contest=contest)
+
+                    IndividualParticipant.objects.update_or_create(
+                        contest=contest,
+                        user=user,
+                        defaults= {
+                            'is_approved': True,
+                            'is_visible_in_scoreboard':True,
+                            'region':region
+                        }
+                    )
 
                     return redirect_to_login(request.build_absolute_uri())
 
